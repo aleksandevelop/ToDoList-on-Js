@@ -176,18 +176,18 @@ class Todo {
     this.render()
   }
 
-  resetFilter(){
-    this.state.filteredItems= null
+  resetFilter() {
+    this.state.filteredItems = null
     this.state.searchQuery = ''
     this.render()
   }
 
-  onNewTaskFormSubmit = (event) =>{
+  onNewTaskFormSubmit = (event) => {
     event.preventDefault()
 
     const newTodoItemTitle = this.newTaskInputElement.value
 
-    if (newTodoItemTitle.trim().length > 0){
+    if (newTodoItemTitle.trim().length > 0) {
       this.addItem(newTodoItemTitle)
       this.resetFilter()
       this.newTaskInputElement.value = ''
@@ -195,17 +195,17 @@ class Todo {
     }
   }
 
-  onSearchTaskFormSubmit = (event) =>{
+  onSearchTaskFormSubmit = (event) => {
     event.preventDefault()
   }
 
   onSearchTaskInputChange = ({target}) => {
     const value = target.value.trim()
 
-    if (value.length > 0){
+    if (value.length > 0) {
       this.state.searchQuery = value
       this.filter()
-    }else{
+    } else {
       this.resetFilter()
     }
   }
@@ -213,7 +213,7 @@ class Todo {
   inDeleteButtonClick = () => {
     const isConfirmed = confirm('Are you sure you want to delete all?')
 
-    if (isConfirmed){
+    if (isConfirmed) {
       this.state.items = []
       this.saveItemsToLocalStorage()
       this.render()
@@ -221,7 +221,7 @@ class Todo {
   }
 
   onClick = ({target}) => {
-    if (target.matches(this.selectors.itemDeleteButton)){
+    if (target.matches(this.selectors.itemDeleteButton)) {
       const itemElement = target.closest(this.selectors.item)
       const itemCheckboxElement = itemElement.querySelector(this.selectors.itemCheckBox)
 
@@ -229,15 +229,17 @@ class Todo {
 
       setTimeout(() => {
         this.deleteItem(itemCheckboxElement.id)
-      },400)
+      }, 400)
     }
   }
   onChange = ({target}) => {
-    if (target.matches(this.selectors.itemCheckBox)){
+    if (target.matches(this.selectors.itemCheckBox)) {
       this.toggleCheckedState(target.id)
     }
   }
-  bindEvents(){
+
+
+  bindEvents() {
     this.newTaskFormElement.addEventListener('submit', this.onNewTaskFormSubmit)
     this.searchTaskFormElement.addEventListener('submit', this.onSearchTaskFormSubmit)
     this.searchTaskInputElement.addEventListener('input', this.onSearchTaskInputChange)
